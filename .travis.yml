@@ -18,3 +18,17 @@ after_success:
   - docker push riccardofuziercayla/multi-nginx
   - docker push riccardofuziercayla/multi-server
   - docker push riccardofuziercayla/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-west-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-eu-west-1-799407746552
+  bucket_patch: docker-multi
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
